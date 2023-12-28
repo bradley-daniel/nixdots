@@ -27,7 +27,7 @@ in {
       "$mainMod" = "SUPER";
 
       monitor = [
-        "DP-1,2560x1440,1920x0,1"
+        "DP-1,2560x1440@144,1920x0,1"
         "DP-2,1920x1200,0x0,1"
       ];
       xwayland = {
@@ -139,6 +139,7 @@ in {
         "$mainMod, R, exec, rofi -show drun -show-icons"
         "$mainMod, P, pseudo"
         "$mainMod, A, togglesplit"
+        "$mainMod, F, fullscreen"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -195,10 +196,10 @@ in {
     };
 
     extraConfig = ''
-      # env = LIBVA_DRIVER_NAME,nvidia
-      # env = XDG_SESSION_TYPE,wayland
-      # env = GBM_BACKEND,nvidia-drm
-      # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+      env = LIBVA_DRIVER_NAME,nvidia
+      env = XDG_SESSION_TYPE,wayland
+      env = GBM_BACKEND,nvidia-drm
+      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
       env = WLR_NO_HARDWARE_CURSORS,1
     '';
   };

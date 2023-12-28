@@ -13,6 +13,7 @@
     ./cli
     ./graphical
     ./system
+    ./themes
   ];
 
   nixpkgs = {

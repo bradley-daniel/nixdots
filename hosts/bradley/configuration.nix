@@ -17,10 +17,10 @@
     supportedFilesystems = ["ntfs"];
     loader = {
       systemd-boot.enable = false;
-      timeout = 10;
+      timeout = 3;
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/boot";
+        # efiSysMountPoint = "/boot";
       };
       grub = {
         enable = true;
@@ -28,23 +28,32 @@
         efiSupport = true;
         useOSProber = true;
         configurationLimit = 3;
-        theme = pkgs.fetchFromGitHub {
-          owner = "shvchk";
-          repo = "fallout-grub-theme";
-          rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
-          sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
+        gfxmodeEfi = "2560x1440";
+        theme = pkgs.sleek-grub-theme.override {
+          withStyle = "dark";
         };
+        # theme = pkgs.fetchFromGitHub {
+        # owner = "shvchk";
+        # repo = "fallout-grub-theme";
+        # rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
+        # sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
+        # };
       };
     };
   };
 
+  services.greetd.enable = true;
+  programs.regreet.enable = true;
+  programs.regreet.settings = ./example.toml;
+  programs.thunar.enable = true;
+
   # Change systemd stop job timeout in NixOS configuration (Default = 90s)
-  systemd = {
-    services.NetworkManager-wait-online.enable = false;
-    extraConfig = ''
-      DefaultTimeoutStopSec=10s
-    '';
-  };
+  # systemd = {
+  #   services.NetworkManager-wait-online.enable = false;
+  #   extraConfig = ''
+  #     DefaultTimeoutStopSec=10s
+  #   '';
+  # };
 
   # Enable networking
   networking = {
@@ -91,8 +100,8 @@
 
   environment = {
     variables = {
-      # GBM_BACKEND = "nvidia-drm";
-      # LIBVA_DRIVER_NAME = "nvidia";
+      GBM_BACKEND = "nvidia-drm";
+      LIBVA_DRIVER_NAME = "nvidia";
       # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
       # __GL_GSYNC_ALLOWED = "1";
       # __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
@@ -186,6 +195,8 @@
     playerctl
     inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
 
+    papirus-icon-theme
+
     # TODO: REMOVE
     neofetch
     swww
@@ -197,12 +208,16 @@
     eza
     wl-clipboard
     ripgrep
+    
+    lua-language-server
+    stylua
 
     google-chrome
     brave
 
     discord
     spotify
+    wlr-randr
   ];
 
   # Enables flakes + garbage collector
