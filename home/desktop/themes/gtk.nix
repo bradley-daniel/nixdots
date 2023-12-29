@@ -1,25 +1,48 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   gtk = {
     enable = true;
-    cursorTheme = {
-      name = "macOS-BigSur";
-      package = pkgs.apple-cursor;
-      size = 32; # Affects gtk applications as the name suggests
+    font = {
+      name = "Lexend";
+      package = pkgs.lexend;
     };
 
+    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
+
     theme = {
-      name = "Catppuccin-Macchiato-Compact-Blue-Dark";
-      package = pkgs.catppuccin-gtk.override {
-        size = "compact";
-        accents = ["blue"];
-        # tweaks = ["rimless" "black"]; # You can also specify multiple tweaks here
-        variant = "macchiato";
-      };
+      name = "Adwaita-dark";
+      package = pkgs.gnome.gnome-themes-extra;
     };
 
     iconTheme = {
       name = "Papirus-Dark";
       package = pkgs.papirus-icon-theme;
     };
+
+    cursorTheme = {
+      name = "macOS-BigSur";
+      package = pkgs.apple-cursor;
+      size = 32; # Affects gtk applications as the name suggests
+    };
+
+    gtk3.extraConfig = {
+      gtk-xft-antialias = 1;
+      gtk-xft-hinting = 1;
+      gtk-xft-hintstyle = "hintslight";
+      gtk-xft-rgba = "rgb";
+      gtk-application-prefer-dark-theme = 1;
+    };
+
+    gtk2.extraConfig = ''
+      gtk-xft-antialias=1
+      gtk-xft-hinting=1
+      gtk-xft-hintstyle="hintslight"
+      gtk-xft-rgba="rgb"
+    '';
+
+    gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
   };
 }

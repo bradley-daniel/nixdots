@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -12,7 +13,7 @@
   # Bootloader.
   boot = {
     # kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
-    #   extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
+    # extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
     kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
     supportedFilesystems = ["ntfs"];
     loader = {
@@ -28,32 +29,29 @@
         efiSupport = true;
         useOSProber = true;
         configurationLimit = 3;
-        gfxmodeEfi = "2560x1440";
-        theme = pkgs.sleek-grub-theme.override {
-          withStyle = "dark";
-        };
-        # theme = pkgs.fetchFromGitHub {
-        # owner = "shvchk";
-        # repo = "fallout-grub-theme";
-        # rev = "80734103d0b48d724f0928e8082b6755bd3b2078";
-        # sha256 = "sha256-7kvLfD6Nz4cEMrmCA9yq4enyqVyqiTkVZV5y4RyUatU=";
+        # theme = pkgs.sleek-grub-theme.override {
+        #   withStyle = "dark";
         # };
       };
     };
   };
 
-  services.greetd.enable = true;
-  programs.regreet.enable = true;
-  programs.regreet.settings = ./example.toml;
-  programs.thunar.enable = true;
-
-  # Change systemd stop job timeout in NixOS configuration (Default = 90s)
-  # systemd = {
-  #   services.NetworkManager-wait-online.enable = false;
-  #   extraConfig = ''
-  #     DefaultTimeoutStopSec=10s
-  #   '';
-  # };
+  # services.greetd.enable = true;
+  # programs.regreet.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+          --remember \
+          --time \
+          --asterisks \
+          --user-menu \
+          --cmd Hyprland
+      '';
+    };
+  };
+  # programs.thunar.enable = true;
 
   # Enable networking
   networking = {
@@ -100,22 +98,18 @@
 
   environment = {
     variables = {
-      GBM_BACKEND = "nvidia-drm";
-      LIBVA_DRIVER_NAME = "nvidia";
-      # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      # __GL_GSYNC_ALLOWED = "1";
-      # __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
-      # XCURSOR_THEME = "macOS-BigSur";
-      # XCURSOR_SIZE = "32";
-      # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      XCURSOR_THEME = "macOS-BigSur";
+      XCURSOR_SIZE = "32";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     };
+
     sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
-      # WLR_NO_HARDWARE_CURSORS = "1"; # Fix cursor rendering issue on wlr nvidia.
-      DEFAULT_BROWSER = "${pkgs.brave}/bin/brave"; # Set default browser
     };
   };
+
+  services.xserver.videoDrivers = ["nvidia"];
 
   hardware = {
     nvidia = {
@@ -135,20 +129,13 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
 
-  # Configure keymap in X11
   services = {
-    # Enable CUPS to print documents.
     printing.enable = true;
-    # logmein-hamachi.enable = false;
+    blueman.enable = true;
     flatpak.enable = false;
   };
 
-  # Configure console keymap
-  # console.keyMap = "en_US.UTF-8";
-
-  # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -173,42 +160,26 @@
     };
   };
 
-  # Use doas instead-of sudo
-  # security = {
-  #   sudo.enable = false;
-  #   doas = {
-  #     enable = true;
-  #     wheelNeedsPassword = true;
-  #     extraRules = [
-  #       {
-  #         users = ["redyf"];
-  #         keepEnv = true;
-  #         persist = true;
-  #       }
-  #     ];
-  #   };
-  # };
-
   environment.systemPackages = with pkgs; [
     git
     wget
     playerctl
     inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
 
-    papirus-icon-theme
-
     # TODO: REMOVE
     neofetch
     swww
+    dunst
     neovim
-    alacritty
     nil
     gcc
     alejandra
     eza
     wl-clipboard
     ripgrep
-    
+
+    libreoffice
+
     lua-language-server
     stylua
 
@@ -234,6 +205,11 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
+  };
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
