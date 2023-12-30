@@ -136,6 +136,7 @@
     flatpak.enable = false;
   };
 
+  # Sound
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -153,7 +154,6 @@
       bradley = {
         isNormalUser = true;
         description = "bradley";
-        # initialPassword = "123456";
         shell = pkgs.zsh;
         extraGroups = ["networkmanager" "wheel" "input" "docker" "libvirtd"];
       };
@@ -177,6 +177,7 @@
     eza
     wl-clipboard
     ripgrep
+    gh
 
     libreoffice
 

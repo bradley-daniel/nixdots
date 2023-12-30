@@ -14,6 +14,7 @@
     ./graphical
     ./system
     ./themes
+    # ./dev
   ];
 
   nixpkgs = {

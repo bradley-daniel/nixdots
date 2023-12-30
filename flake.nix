@@ -11,6 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim = {
+      url = "github:bradley-daniel/neovim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -19,18 +23,31 @@
     hyprland,
     home-manager,
     utils,
+    neovim,
     ...
   } @ inputs: {
     nixosConfigurations = {
       bradley =
         nixpkgs.lib.nixosSystem
-        {
+        rec {
           system = "x86_64-linux";
           specialArgs = {
             inherit
               inputs
               hyprland
               ;
+
+            pkgs = import nixpkgs {
+              inherit system;
+              config = {
+                allowUnfree = true;
+              };
+              overlays = [
+                (final: prev: {
+                  neovim = inputs.neovim.packages.${final.system}.neovim;
+                })
+              ];
+            };
           };
           modules = [
             ./hosts/bradley/configuration.nix
