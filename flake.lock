@@ -143,11 +143,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1703748485,
-        "narHash": "sha256-2HNXMXwipv+DgLo1/2Y+BbxvG6V0A29U7qklFhZH3cU=",
+        "lastModified": 1703908208,
+        "narHash": "sha256-wBUYPrCyr5wr2rxpwkQP5S0kcR1oWbKy1UGAI2LVzaA=",
         "owner": "bradley-daniel",
         "repo": "neovim",
-        "rev": "ffd04ffbda1c03efdab8c6f04fb067211afb6ea1",
+        "rev": "65891f3d52f614ac7812ca9588010f3481f14464",
         "type": "github"
       },
       "original": {
