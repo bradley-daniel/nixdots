@@ -14,7 +14,7 @@
   boot = {
     # kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
     # extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
-    kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
+    # kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
     supportedFilesystems = ["ntfs"];
     loader = {
       systemd-boot.enable = false;
@@ -178,6 +178,7 @@
     wl-clipboard
     ripgrep
     gh
+    brave
 
     libreoffice
 
@@ -185,7 +186,6 @@
     stylua
 
     google-chrome
-    brave
 
     discord
     spotify

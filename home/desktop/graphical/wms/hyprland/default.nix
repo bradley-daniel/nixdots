@@ -6,6 +6,11 @@
   active_border = "rgba(b4befeee)";
   inactive_border = "rgba(ffffffee)";
 in {
+  home.sessionVariables = {
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    XDG_SESSION_TYPE = "wayland";
+  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -15,6 +20,24 @@ in {
     settings = {
       "$mainMod" = "SUPER";
 
+      env = ''
+        env = XDG_SESSION_TYPE,wayland
+        env = XDG_SESSION_DESKTOP,Hyprland
+
+        env = GDK_BACKEND,wayland
+        env = QT_QPA_PLATFORM,wayland
+        env = QT_QPA_PLATFORMTHEME,qt5ct
+        env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+        env = QT_AUTO_SCREEN_SCALE_FACTOR,1
+        env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+
+        env = SDL_VIDEODRIVER,wayland
+        env = _JAVA_AWT_WM_NONREPARENTING,1
+        env = WLR_NO_HARDWARE_CURSORS,1
+        env = WLR_DRM_NO_ATOMIC,1
+
+        env = OZONE_PLATFORM,wayland
+      '';
       monitor = [
         "DP-2,2560x1440@144,1920x0,1"
         "DP-1,1920x1200,0x0,1"
@@ -116,9 +139,7 @@ in {
 
       exec-once = [
         "swww init && swww img ~/Wallpapers/vader.png"
-        # "easyeffects --gapplication-service" # Starts easyeffects in the background
-        # "$HOME/.config/hypr/autostart"
-        # "exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dunst"
       ];
       bind = [
         "$mainMod, Q, exec, alacritty"
@@ -184,13 +205,5 @@ in {
         "2,monitor:DP-1,default:true"
       ];
     };
-
-    extraConfig = ''
-      env = LIBVA_DRIVER_NAME,nvidia
-      env = XDG_SESSION_TYPE,wayland
-      env = GBM_BACKEND,nvidia-drm
-      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-      env = WLR_NO_HARDWARE_CURSORS,1
-    '';
   };
 }
