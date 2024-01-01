@@ -2,4 +2,4 @@
 
 ## Inspiration
 
-* [redyf]<https://github.com/redyf/nixdots>
+* [redyf](https://github.com/redyf/nixdots)
