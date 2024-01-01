@@ -12,16 +12,16 @@
 
   # Bootloader.
   boot = {
-    # kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
+    kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
     # extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
-    # kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
+    kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
     supportedFilesystems = ["ntfs"];
     loader = {
       systemd-boot.enable = false;
       timeout = 3;
       efi = {
         canTouchEfiVariables = true;
-        # efiSysMountPoint = "/boot";
+        efiSysMountPoint = "/boot";
       };
       grub = {
         enable = true;
@@ -29,15 +29,10 @@
         efiSupport = true;
         useOSProber = true;
         configurationLimit = 3;
-        # theme = pkgs.sleek-grub-theme.override {
-        #   withStyle = "dark";
-        # };
       };
     };
   };
 
-  # services.greetd.enable = true;
-  # programs.regreet.enable = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -51,7 +46,6 @@
       '';
     };
   };
-  # programs.thunar.enable = true;
 
   # Enable networking
   networking = {
@@ -73,6 +67,8 @@
     zsh.enable = true;
     steam.enable = true;
     dconf.enable = true;
+    thunar.enable = true;
+    nano.enable = false;
     hyprland = {
       enable = true;
       xwayland = {
@@ -98,50 +94,38 @@
 
   environment = {
     variables = {
-      WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line
-      NIXOS_OZONE_WL = "1";
-      # QT_QPA_PLATFORMTHEME = "gtk3";
-      # QT_SCALE_FACTOR = "1";
-      #MOZ_ENABLE_WAYLAND = "1";
-      SDL_VIDEODRIVER = "wayland";
-      # _JAVA_AWT_WM_NONREPARENTING = "1";
-      # QT_QPA_PLATFORM = "wayland-egl";
-      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      # WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
-      # GBM_BACKEND = "nvidia-drm";
-      CLUTTER_BACKEND = "wayland";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-      LIBVA_DRIVER_NAME = "nvidia";
-      WLR_RENDERER = "vulkan";
-      __NV_PRIME_RENDER_OFFLOAD = "1";
-      XDG_CURRENT_DESKTOP = "Hyprland";
-      XDG_SESSION_DESKTOP = "Hyprland";
-      XDG_SESSION_TYPE = "wayland";
-      GTK_USE_PORTAL = "1";
-      NIXOS_XDG_OPEN_USE_PORTAL = "1";
       XDG_CACHE_HOME = "\${HOME}/.cache";
       XDG_CONFIG_HOME = "\${HOME}/.config";
       XDG_BIN_HOME = "\${HOME}/.local/bin";
       XDG_DATA_HOME = "\${HOME}/.local/share";
-      # XCURSOR_THEME = "macOS-BigSur";
-      # XCURSOR_SIZE = "32";
-      # QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-      # QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      QT_AUTO_SCREEN_SCALE_FACTOR = "1";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
+      __GL_GSYNC_ALLOWED = "1";
+      __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
     };
 
-    # sessionVariables = {
-    #   NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
-    # };
+    sessionVariables = {
+      NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
+    };
   };
 
-  services.xserver.videoDrivers = ["nvidia"];
+  services = {
+    # Enable CUPS to print documents.
+    # printing.enable = true;
+    blueman.enable = true;
+    xserver = {
+      # enable = true;
+      videoDrivers = ["nvidia"];
+    };
+    logmein-hamachi.enable = false;
+    flatpak.enable = false;
+  };
 
   hardware = {
     nvidia = {
       open = false;
       nvidiaSettings = true;
-      powerManagement.enable = true;
+      # powerManagement.enable = true;
       modesetting.enable = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
@@ -155,12 +139,6 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
-
-  services = {
-    printing.enable = true;
-    blueman.enable = true;
-    flatpak.enable = false;
-  };
 
   # Sound
   sound.enable = true;
@@ -205,6 +183,10 @@
     ripgrep
     gh
     brave
+    htop
+    btop
+
+    polkit_gnome
 
     libreoffice
 

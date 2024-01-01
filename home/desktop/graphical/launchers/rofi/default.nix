@@ -15,16 +15,16 @@
         g-spacing: 10px;
         g-margin: 0;
         b-color: #000000FF;
-        fg-color: #FFFFFFFF;
+        fg-color: #cdd6f4FF;
         fgp-color: #888888FF;
-        b-radius: 8px;
+        b-radius: 0px;
         g-padding: 8px;
-        hl-color: #FFFFFFFF;
+        hl-color: #89b4faaa;
         hlt-color: #000000FF;
-        alt-color: #111111FF;
-        wbg-color: #000000CC;
+        alt-color: #11111baa;
+        wbg-color: #080A0Faa;
         w-border: 2px solid;
-        w-border-color: #FFFFFFFF;
+        w-border-color: #b4befeFF;
         w-padding: 12px;
     }
 
@@ -36,7 +36,7 @@
 
     listview {
         columns: 1;
-        lines: 7;
+        lines: 10;
         fixed-height: true;
         fixed-columns: true;
         cycle: false;
@@ -46,7 +46,7 @@
 
     window {
         transparency: "real";
-        width: 450px;
+        width: 500px;
         border-radius: @b-radius;
         background-color: @wbg-color;
         border: @w-border;

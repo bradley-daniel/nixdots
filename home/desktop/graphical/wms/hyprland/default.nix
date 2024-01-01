@@ -3,37 +3,9 @@
   pkgs,
   ...
 }: let
-  active_border = "rgba(b4befeee)";
-  inactive_border = "rgba(ffffffee)";
+  active_border = "rgba(b4befecc)";
+  inactive_border = "rgba(1e1e2ecc)";
 in {
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    # QT_QPA_PLATFORMTHEME = "gtk3";
-    # QT_SCALE_FACTOR = "1";
-    #MOZ_ENABLE_WAYLAND = "1";
-    SDL_VIDEODRIVER = "wayland";
-    # _JAVA_AWT_WM_NONREPARENTING = "1";
-    # QT_QPA_PLATFORM = "wayland-egl";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-    # WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
-    WLR_NO_HARDWARE_CURSORS = "1"; # if no cursor,uncomment this line
-    # GBM_BACKEND = "nvidia-drm";
-    CLUTTER_BACKEND = "wayland";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    LIBVA_DRIVER_NAME = "nvidia";
-    WLR_RENDERER = "vulkan";
-    __NV_PRIME_RENDER_OFFLOAD = "1";
-    XDG_CURRENT_DESKTOP = "Hyprland";
-    XDG_SESSION_DESKTOP = "Hyprland";
-    XDG_SESSION_TYPE = "wayland";
-    GTK_USE_PORTAL = "1";
-    NIXOS_XDG_OPEN_USE_PORTAL = "1";
-    XDG_CACHE_HOME = "\${HOME}/.cache";
-    XDG_CONFIG_HOME = "\${HOME}/.config";
-    XDG_BIN_HOME = "\${HOME}/.local/bin";
-    XDG_DATA_HOME = "\${HOME}/.local/share";
-  };
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -42,27 +14,8 @@ in {
     };
     settings = {
       "$mainMod" = "SUPER";
-
-      # env = ''
-      #   env = XDG_SESSION_TYPE,wayland
-      #   env = XDG_SESSION_DESKTOP,Hyprland
-      #
-      #   env = GDK_BACKEND,wayland
-      #   env = QT_QPA_PLATFORM,wayland
-      #   env = QT_QPA_PLATFORMTHEME,qt5ct
-      #   env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-      #   env = QT_AUTO_SCREEN_SCALE_FACTOR,1
-      #   env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-      #
-      #   env = SDL_VIDEODRIVER,wayland
-      #   env = _JAVA_AWT_WM_NONREPARENTING,1
-      #   env = WLR_NO_HARDWARE_CURSORS,1
-      #   env = WLR_DRM_NO_ATOMIC,1
-      #
-      #   env = OZONE_PLATFORM,wayland
-      # '';
       monitor = [
-        "DP-2,2560x1440@144,1920x0,1"
+        "DP-2,highres,1920x0,1"
         "DP-1,1920x1200,0x0,1"
       ];
       xwayland = {
@@ -161,8 +114,7 @@ in {
       };
 
       exec-once = [
-        "swww init && swww img ~/Wallpapers/vader.png"
-        "dunst"
+        "${./autostart.sh}"
       ];
       bind = [
         "$mainMod, Q, exec, alacritty"
@@ -228,5 +180,12 @@ in {
         "2,monitor:DP-1,default:true"
       ];
     };
+    extraConfig = ''
+      env = LIBVA_DRIVER_NAME,nvidia
+      env = XDG_SESSION_TYPE,wayland
+      env = GBM_BACKEND,nvidia-drm
+      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+      env = WLR_NO_HARDWARE_CURSORS,1
+    '';
   };
 }
