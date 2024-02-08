@@ -11,10 +11,6 @@
     extraConfig = ''
       set -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",xterm-256color:RGB"
-      # set -g default-terminal "tmux-256color"
-      # set -ga terminal-overrides ",*256col*:Tc"
-      # set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
-      # set-environment -g COLORTERM "truecolor"
 
       set -g mouse on
 
@@ -67,7 +63,7 @@
             };
           });
         extraConfig = ''
-          set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
+          # set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
         '';
       }
     ];

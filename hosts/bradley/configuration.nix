@@ -187,6 +187,8 @@
     brave
     htop
     btop
+    rustup
+    fzf
 
     polkit_gnome
 

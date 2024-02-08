@@ -27,7 +27,7 @@
         size = 12;
       };
       env = {
-          TERM = "xterm-256color";
+        TERM = "xterm-256color";
       };
       window = {
         padding = {
@@ -35,6 +35,15 @@
           y = 0;
         };
         dynamic_padding = true;
+      };
+      keyboard = {
+        bindings = [
+          {
+            key = "w";
+            mods = "controls";
+            chars = "~/Personal/bin/tmux_sessionizer";
+          }
+        ];
       };
       cursor = {
         style = {

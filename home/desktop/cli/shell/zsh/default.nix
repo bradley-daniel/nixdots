@@ -25,6 +25,7 @@
     shellAliases = {
       l = "eza -lFha --icons";
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
+      vim = "nvim";
     };
     initExtra = ''
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
