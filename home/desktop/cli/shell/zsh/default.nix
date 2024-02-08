@@ -23,7 +23,7 @@
     };
     historySubstringSearch.enable = true;
     shellAliases = {
-      l = "eza -lFha --icons";
+      l = "eza -lha --icons";
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
       vim = "nvim";
     };

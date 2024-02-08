@@ -1,9 +1,9 @@
 {...}: {
-  home.file.".config/alacritty/catppuccin.yml".source = ./themes/catppuccin.yml;
+  home.file.".config/alacritty/catppuccin.toml".source = ./themes/catppuccin.toml;
   programs.alacritty = {
     enable = true;
     settings = {
-      import = ["~/.config/alacritty/catppuccin.yml"];
+      import = ["~/.config/alacritty/catppuccin.toml"];
       font = {
         normal = {
           family = "JetBrainsMono Nerd Font";
@@ -40,8 +40,8 @@
         bindings = [
           {
             key = "w";
-            mods = "controls";
-            chars = "~/Personal/bin/tmux_sessionizer";
+            mods = "control";
+            chars = "~/Personal/bin/tmux_sessionizer \r";
           }
         ];
       };
