@@ -26,6 +26,9 @@
         };
         size = 12;
       };
+      env = {
+          TERM = "xterm-256color";
+      };
       window = {
         padding = {
           x = 10;

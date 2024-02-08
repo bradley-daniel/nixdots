@@ -40,8 +40,8 @@ in {
         sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
       };
       general = {
-        gaps_in = 5;
-        gaps_out = 5;
+        gaps_in = 2;
+        gaps_out = 2;
         border_size = 2;
         "col.active_border" = "${active_border}";
         "col.inactive_border" = "${inactive_border}";

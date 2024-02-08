@@ -4,7 +4,7 @@
 swww kill
 swww init
 
-swww img ~/Wallpapers/nix.png &
+swww img ~/Wallpapers/tree-person-standing.png &
 
 dunst &
 
