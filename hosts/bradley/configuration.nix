@@ -188,7 +188,7 @@
     htop
     btop
     rustup
-    fzf
+    # fzf
 
     polkit_gnome
 
