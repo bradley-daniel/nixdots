@@ -5,13 +5,13 @@
 }: let
   active_border = "rgba(b4befecc)";
   inactive_border = "rgba(1e1e2ecc)";
+  animation_spead = "0.5";
 in {
   wayland.windowManager.hyprland = {
-    enable = true;
     package = pkgs.hyprland;
-    xwayland = {
-      enable = true;
-    };
+    enable = true;
+    xwayland.enable = true;
+    systemd.enable = true;
     settings = {
       "$mainMod" = "SUPER";
       monitor = [
@@ -76,14 +76,13 @@ in {
           "md3_decel, 0.05, 0.7, 0.1, 1"
         ];
         animation = [
-          "windowsIn,1,6,md3_decel,slide"
-          "windowsOut,1,6,md3_decel,slide"
-          "windowsMove,1,6,md3_decel,slide"
-          "fade,1,10,md3_decel"
-          "workspaces,1,9,md3_decel,slide"
-          "workspaces, 1, 6, default"
-          "specialWorkspace,1,8,md3_decel,slide"
-          "border,1,10,md3_decel"
+          "windowsIn,1,${animation_spead},md3_decel,slide"
+          "windowsMove,1,${animation_spead},md3_decel,slide"
+          "fade,1,${animation_spead},md3_decel"
+          "workspaces,1,${animation_spead},md3_decel,slide"
+          "workspaces, 1, ${animation_spead}, default"
+          "specialWorkspace,1,${animation_spead},md3_decel,slide"
+          "border,1,${animation_spead},md3_decel"
         ];
       };
       dwindle = {
@@ -114,10 +113,14 @@ in {
       };
 
       exec-once = [
-        "${./autostart.sh}"
+        "swww init && swww img ~/Wallpapers/tree-person-standing.png"
+        "dunst"
+        "waybar"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       ];
       bind = [
         "$mainMod, Q, exec, alacritty"
+        "$mainMod, B, exec, firefox"
         "$mainMod, C, killactive"
         "$mainMod, M, exit"
         "$mainMod, V, togglefloating"
@@ -173,19 +176,43 @@ in {
       windowrulev2 = [
         "stayfocused, title:^()$,class:^(steam)$"
         "minsize 1 1, title:^()$,class:^(steam)$"
+        "stayfocused, title:^()$,class:^(firefox)$"
+        "minsize 1 1, title:^()$,class:^(firefox)$"
+
+        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+        "noanim,class:^(xwaylandvideobridge)$"
+        "noinitialfocus,class:^(xwaylandvideobridge)$"
+        "maxsize 1 1,class:^(xwaylandvideobridge)$"
+        "noblur,class:^(xwaylandvideobridge)$"
       ];
 
       workspace = [
         "1,monitor:DP-2,default:true"
-        "2,monitor:DP-1,default:true"
+        "6,monitor:DP-1,default:true"
       ];
     };
     extraConfig = ''
-      env = LIBVA_DRIVER_NAME,nvidia
-      env = XDG_SESSION_TYPE,wayland
-      env = GBM_BACKEND,nvidia-drm
-      env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-      env = WLR_NO_HARDWARE_CURSORS,1
+      # env = LIBVA_DRIVER_NAME,nvidia
+      # env = XDG_SESSION_TYPE,wayland
+      # env = GBM_BACKEND,nvidia-drm
+      # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+      # env = WLR_NO_HARDWARE_CURSORS,1
+
+
+      env = NIXOS_OZONE_WL, 1
+      env = XDG_CURRENT_DESKTOP, Hyprland
+      env = XDG_SESSION_TYPE, wayland
+      env = XDG_SESSION_DESKTOP, Hyprland
+      env = GDK_BACKEND, wayland
+      env = CLUTTER_BACKEND, wayland
+
+      env = QT_QPA_PLATFORM, wayland
+      env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
+      env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
+      env = MOZ_ENABLE_WAYLAND, 1
+
+        env = WLR_NO_HARDWARE_CURSORS,1
+
     '';
   };
 }

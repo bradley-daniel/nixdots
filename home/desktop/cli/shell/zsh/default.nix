@@ -4,6 +4,10 @@
   lib,
   ...
 }: {
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -26,8 +30,10 @@
       l = "eza -lha --icons";
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
       vim = "nvim";
+      quarto = "steam-run $HOME/Personal/bin/quarto";
     };
     initExtra = ''
+      unset zle_bracketed_paste
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
         source ${./p10k.zsh}
       else
