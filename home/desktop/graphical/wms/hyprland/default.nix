@@ -15,8 +15,8 @@ in {
     settings = {
       "$mainMod" = "SUPER";
       monitor = [
-        "DP-2,highres,1920x0,1"
-        "DP-1,1920x1200,0x0,1"
+        "DP-4,highres,1920x0,1"
+        "DP-5,1920x1200,0x0,1"
       ];
       xwayland = {
         force_zero_scaling = true;
@@ -187,8 +187,8 @@ in {
       ];
 
       workspace = [
-        "1,monitor:DP-2,default:true"
-        "6,monitor:DP-1,default:true"
+        "1,monitor:DP-4,default:true"
+        "6,monitor:DP-5,default:true"
       ];
     };
     extraConfig = ''
