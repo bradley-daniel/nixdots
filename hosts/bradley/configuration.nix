@@ -102,34 +102,6 @@
     libvirtd.enable = true;
   };
 
-  programs.neovim.defaultEditor = true;
-
-  # environment = {
-  #     XDG_CACHE_HOME = "\${HOME}/.cache";
-  #     XDG_CONFIG_HOME = "\${HOME}/.config";
-  #     XDG_BIN_HOME = "\${HOME}/.local/bin";
-  #     XDG_DATA_HOME = "\${HOME}/.local/share";
-  #     QT_AUTO_SCREEN_SCALE_FACTOR = "1";
-  #     QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-  #     __GL_GSYNC_ALLOWED = "1";
-  #     __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
-  #   };
-  #
-  #   sessionVariables = {
-  #     NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
-  #
-  #     XDG_CURRENT_DESKTOP = "Hyprland";
-  #     XDG_SESSION_TYPE = "wayland";
-  #     XDG_SESSION_DESKTOP = "Hyprland";
-  #     GDK_BACKEND = "wayland";
-  #     CLUTTER_BACKEND = "wayland";
-  #     MOZ_ENABLE_WAYLAND = 1;
-  #   };
-  # };
-  # configuration.nix
-
-  # Making sure to use the proprietary drivers until the issue above is fixed upstream
-
   services = {
     blueman.enable = true;
     logmein-hamachi.enable = false;
@@ -137,13 +109,6 @@
   };
 
   hardware = {
-    # nvidia = {
-    #   open = false;
-    #   nvidiaSettings = true;
-    #   powerManagement.enable = true;
-    #   modesetting.enable = true;
-    #   package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # };
     opengl = {
       enable = true;
       driSupport32Bit = true;
@@ -207,6 +172,8 @@
     rustup
     fzf
     gimp
+    unzip
+    zip
 
     polkit_gnome
 
@@ -235,7 +202,7 @@
     # Modesetting is required.
     modesetting.enable = true;
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
     powerManagement.finegrained = false;

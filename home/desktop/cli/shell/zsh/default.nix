@@ -31,6 +31,7 @@
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
       vim = "nvim";
       quarto = "steam-run $HOME/Personal/bin/quarto";
+      nano="nvim";
     };
     initExtra = ''
       unset zle_bracketed_paste
@@ -39,6 +40,7 @@
       else
         bash -i
        fi
+      export EDITOR=nvim
     '';
     plugins = [
       {
