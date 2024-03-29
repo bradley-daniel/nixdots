@@ -15,8 +15,8 @@ in {
     settings = {
       "$mainMod" = "SUPER";
       monitor = [
-        "DP-4,highres,1920x0,1"
-        "DP-5,1920x1200,0x0,1"
+        "DP-1,highres,1920x0,1"
+        "DP-2,1920x1200,0x0,1"
       ];
       xwayland = {
         force_zero_scaling = true;

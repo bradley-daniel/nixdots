@@ -102,8 +102,11 @@
     libvirtd.enable = true;
   };
 
-  # environment = {
-  #   variables = {
+  environment = {
+    variables = {
+        EDITOR = "nvim";
+    };
+  };
   #     XDG_CACHE_HOME = "\${HOME}/.cache";
   #     XDG_CONFIG_HOME = "\${HOME}/.config";
   #     XDG_BIN_HOME = "\${HOME}/.local/bin";
@@ -205,6 +208,7 @@
     btop
     rustup
     fzf
+    gimp
 
     polkit_gnome
 
@@ -274,7 +278,6 @@
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
-
   environment.variables = {
     NIXOS_OZONE_WL = "1";
     GBM_BACKEND = "nvidia-drm";
@@ -295,9 +298,6 @@
     CLUTTER_BACKEND = "wayland";
     WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
   };
-
-
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
