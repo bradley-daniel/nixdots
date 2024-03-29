@@ -102,11 +102,9 @@
     libvirtd.enable = true;
   };
 
-  environment = {
-    variables = {
-        EDITOR = "nvim";
-    };
-  };
+  programs.neovim.defaultEditor = true;
+
+  # environment = {
   #     XDG_CACHE_HOME = "\${HOME}/.cache";
   #     XDG_CONFIG_HOME = "\${HOME}/.config";
   #     XDG_BIN_HOME = "\${HOME}/.local/bin";
