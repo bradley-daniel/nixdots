@@ -187,32 +187,9 @@ in {
       ];
 
       workspace = [
-        "1,monitor:DP-4,default:true"
-        "6,monitor:DP-5,default:true"
+        "1,monitor:DP-1,default:true"
+        "6,monitor:DP-2,default:true"
       ];
     };
-    extraConfig = ''
-      # env = LIBVA_DRIVER_NAME,nvidia
-      # env = XDG_SESSION_TYPE,wayland
-      # env = GBM_BACKEND,nvidia-drm
-      # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-      # env = WLR_NO_HARDWARE_CURSORS,1
-
-
-      env = NIXOS_OZONE_WL, 1
-      env = XDG_CURRENT_DESKTOP, Hyprland
-      env = XDG_SESSION_TYPE, wayland
-      env = XDG_SESSION_DESKTOP, Hyprland
-      env = GDK_BACKEND, wayland
-      env = CLUTTER_BACKEND, wayland
-
-      env = QT_QPA_PLATFORM, wayland
-      env = QT_WAYLAND_DISABLE_WINDOWDECORATION, 1
-      env = QT_AUTO_SCREEN_SCALE_FACTOR, 1
-      env = MOZ_ENABLE_WAYLAND, 1
-
-        env = WLR_NO_HARDWARE_CURSORS,1
-
-    '';
   };
 }

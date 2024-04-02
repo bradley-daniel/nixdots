@@ -29,18 +29,16 @@
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
-        configurationLimit = 3;
+        configurationLimit = 10;
       };
     };
   };
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    deno
-
     # Add any missing dynamic libraries for unpackaged programs
-
     # here, NOT in environment.systemPackages
+    deno
   ];
 
   services.greetd = {
@@ -74,8 +72,8 @@
 
   # Enable programs
   programs = {
+    steam.enable = true;
     zsh.enable = true;
-    # steam.enable = true;
     dconf.enable = true;
     thunar.enable = true;
     nano.enable = false;
@@ -147,13 +145,13 @@
   };
 
   environment.systemPackages = with pkgs; [
+    inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
     git
     wget
     playerctl
 
     steam-run
 
-    inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
 
     # TODO: REMOVE
     neofetch
@@ -191,8 +189,6 @@
     firefox
 
     waybar
-
-    xwaylandvideobridge
   ];
 
   # Nvidia
@@ -244,24 +240,11 @@
   };
 
   environment.variables = {
-    NIXOS_OZONE_WL = "1";
-    GBM_BACKEND = "nvidia-drm";
-    __GL_GSYNC_ALLOWED = "0";
-    __GL_VRR_ALLOWED = "0";
-    DISABLE_QT5_COMPAT = "0";
-    ANKI_WAYLAND = "1";
-    DIRENV_LOG_FORMAT = "";
-    WLR_DRM_NO_ATOMIC = "1";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    QT_QPA_PLATFORM = "wayland";
-    QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
-    MOZ_ENABLE_WAYLAND = "1";
-    WLR_BACKEND = "vulkan";
-    WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
     XDG_SESSION_TYPE = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    WLR_DRM_DEVICES = "/dev/dri/card1:/dev/dri/card0";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    WLR_NO_HARDWARE_CURSORS = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

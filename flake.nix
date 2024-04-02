@@ -5,7 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     hyprland = {
-      # url = "github:hyprwm/hyprland/fbf5ba87ce57752653f3bebf6e2be090c702836e";
       url = "github:hyprwm/hyprland";
     };
     waybar-hyprland.url = "github:hyprwm/hyprland";

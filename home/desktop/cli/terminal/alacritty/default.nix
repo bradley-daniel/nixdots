@@ -24,7 +24,7 @@
           family = "JetBrainsMono Nerd Font";
           style = "Bold Italic";
         };
-        size = 12;
+        size = 14;
       };
       env = {
         TERM = "xterm-256color";
