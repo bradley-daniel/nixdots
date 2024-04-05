@@ -22,12 +22,6 @@
       package = pkgs.papirus-icon-theme;
     };
 
-    cursorTheme = {
-      name = "macOS-BigSur";
-      package = pkgs.apple-cursor;
-      size = 32; # Affects gtk applications as the name suggests
-    };
-
     gtk3.extraConfig = {
       gtk-xft-antialias = 1;
       gtk-xft-hinting = 1;

@@ -27,6 +27,8 @@
 
   home.sessionPath = [
     "$HOME/.local/bin"
+    "$HOME/Dev/bin"
+    "$HOME/.cargo/bin"
   ];
 
 }

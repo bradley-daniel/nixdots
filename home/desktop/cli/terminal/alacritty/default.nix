@@ -41,7 +41,7 @@
           {
             key = "w";
             mods = "control";
-            chars = "~/Personal/bin/tmux_sessionizer \r";
+            chars = "tmuxsess \r";
           }
         ];
       };

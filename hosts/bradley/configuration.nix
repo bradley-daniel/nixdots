@@ -72,7 +72,7 @@
 
   # Enable programs
   programs = {
-    steam.enable = true;
+    # steam.enable = true;
     zsh.enable = true;
     dconf.enable = true;
     thunar.enable = true;
@@ -86,9 +86,11 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
+
+  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config = {
+  #   allowUnfree = true;
+  # };
 
   # Enables docker in rootless mode
   virtualisation = {
@@ -152,7 +154,6 @@
 
     steam-run
 
-
     # TODO: REMOVE
     neofetch
     swww
@@ -177,6 +178,12 @@
 
     libreoffice
 
+    android-studio
+    nodejs_21
+    jdk
+    # typescript
+    nodePackages.typescript-language-server
+
     lua-language-server
     stylua
 
@@ -185,7 +192,6 @@
     wlr-randr
     pamixer
 
-    google-chrome
     firefox
 
     waybar
@@ -245,6 +251,7 @@
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

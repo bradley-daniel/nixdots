@@ -27,11 +27,11 @@
     };
     historySubstringSearch.enable = true;
     shellAliases = {
-      l = "eza -lh --icons";
+      l = "eza -lha --icons";
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
       vim = "nvim";
-      quarto = "steam-run $HOME/Personal/bin/quarto";
-      nano="nvim";
+      nixswitch = "sudo nixos-rebuild switch --flake ~/.nixdots#bradley";
+      nano = "nvim";
     };
     initExtra = ''
       unset zle_bracketed_paste
@@ -40,7 +40,7 @@
       else
         bash -i
        fi
-      export EDITOR=nvim
+      source $HOME/Dev/bin/zshrc.zsh
     '';
     plugins = [
       {
