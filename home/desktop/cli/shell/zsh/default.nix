@@ -27,7 +27,7 @@
     };
     historySubstringSearch.enable = true;
     shellAliases = {
-      l = "eza -lha --icons";
+      l = "eza -lh --icons";
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
       vim = "nvim";
       nixswitch = "sudo nixos-rebuild switch --flake ~/.nixdots#bradley";

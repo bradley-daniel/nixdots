@@ -128,6 +128,7 @@ in {
         "$mainMod, P, pseudo"
         "$mainMod, A, togglesplit"
         "$mainMod, F, fullscreen"
+        "$mainMod, S, exec, $HOME/Dev/bin/snip"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"
@@ -164,8 +165,8 @@ in {
         "$mainMod SHIFT, 9, movetoworkspace, 9"
 
         # Example special workspace (scratchpad)
-        "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod SHIFT, S, movetoworkspace, special:magic"
+        # "$mainMod, S, togglespecialworkspace, magic"
+        # "$mainMod SHIFT, S, movetoworkspace, special:magic"
       ];
 
       bindm = [

@@ -66,6 +66,7 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
+  services.automatic-timezoned.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -193,8 +194,13 @@
     pamixer
 
     firefox
+linuxKernel.packages.linux_6_8.perf
 
     waybar
+    # hyprshot
+    swappy
+    slurp
+    grim
   ];
 
   # Nvidia
