@@ -188,13 +188,14 @@
     lua-language-server
     stylua
 
-    discord
     spotify
     wlr-randr
     pamixer
+    webcord
 
     firefox
-linuxKernel.packages.linux_6_8.perf
+    xwaylandvideobridge
+    linuxKernel.packages.linux_6_8.perf
 
     waybar
     # hyprshot
