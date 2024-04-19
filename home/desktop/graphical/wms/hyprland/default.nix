@@ -6,6 +6,8 @@
   active_border = "rgba(b4befecc)";
   inactive_border = "rgba(1e1e2ecc)";
   animation_spead = "0.5";
+  dp1 = "DP-3";
+  dp2 = "DP-2";
 in {
   wayland.windowManager.hyprland = {
     package = pkgs.hyprland;
@@ -15,8 +17,8 @@ in {
     settings = {
       "$mainMod" = "SUPER";
       monitor = [
-        "DP-1,highres,1920x0,1"
-        "DP-2,1920x1200,0x0,1"
+        "${dp1},highres,1920x0,1"
+        "${dp2},1920x1200,0x0,1"
       ];
       xwayland = {
         force_zero_scaling = true;
@@ -188,8 +190,8 @@ in {
       ];
 
       workspace = [
-        "1,monitor:DP-1,default:true"
-        "6,monitor:DP-2,default:true"
+        "1,monitor:${dp1},default:true"
+        "6,monitor:${dp2},default:true"
       ];
     };
   };

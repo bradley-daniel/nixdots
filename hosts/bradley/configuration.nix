@@ -1,4 +1,4 @@
-{
+ {
   config,
   pkgs,
   inputs,
@@ -41,19 +41,19 @@
     deno
   ];
 
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session.command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
-          --remember \
-          --time \
-          --asterisks \
-          --user-menu \
-          --cmd Hyprland
-      '';
-    };
-  };
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session.command = ''
+  #       ${pkgs.greetd.tuigreet}/bin/tuigreet \
+  #         --remember \
+  #         --time \
+  #         --asterisks \
+  #         --user-menu \
+  #         --cmd Hyprland
+  #     '';
+  #   };
+  # };
 
   # Enable networking
   networking = {
@@ -73,17 +73,17 @@
 
   # Enable programs
   programs = {
-    # steam.enable = true;
+    steam.enable = true;
     zsh.enable = true;
     dconf.enable = true;
     thunar.enable = true;
     nano.enable = false;
-    hyprland = {
-      enable = true;
-      xwayland = {
-        enable = true;
-      };
-    };
+    # hyprland = {
+    #   enable = true;
+    #   xwayland = {
+    #     enable = true;
+    #   };
+    # };
   };
 
   # Allow unfree packages
@@ -109,7 +109,11 @@
     flatpak.enable = false;
   };
 
+  environment.pathsToLink = ["/libexec"];
+
   hardware = {
+    enableAllFirmware = true;
+    cpu.amd.updateMicrocode = true;
     opengl = {
       enable = true;
       driSupport32Bit = true;
@@ -148,7 +152,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
+    # inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
     git
     wget
     playerctl
@@ -164,7 +168,6 @@
     gcc
     alejandra
     eza
-    wl-clipboard
     ripgrep
     gh
     htop
@@ -181,9 +184,14 @@
 
     android-studio
     nodejs_21
+    prettierd
     jdk
     # typescript
     nodePackages.typescript-language-server
+    nodePackages.prettier
+    nodePackages.pyright
+
+    jq
 
     lua-language-server
     stylua
@@ -191,21 +199,59 @@
     spotify
     wlr-randr
     pamixer
-    webcord
+    discord
+
+    zoom-us
 
     firefox
-    xwaylandvideobridge
+    # xwaylandvideobridge
     linuxKernel.packages.linux_6_8.perf
 
-    waybar
+    xclip
+    xorg.xrandr
+    feh
+
+    python311
+    ruff
+    poetry
+    # (pkgs.python311.withPackages
+    #   (ps:
+    #     with ps; [
+    #       # Python Dev pkgs
+    #       # flake8
+    #       # black
+    #     ]))
+
+    # wl-clipboard
+    # waybar
     # hyprshot
-    swappy
-    slurp
-    grim
+    # swappy
+    # slurp
+    # grim
   ];
 
   # Nvidia
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver = {
+    videoDrivers = ["nvidia"];
+
+    enable = true;
+
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        i3blocks
+        dmenu
+      ];
+    };
+
+    desktopManager = {
+      xterm.enable = false;
+    };
+
+    displayManager = {
+      lightdm.enable = true;
+    };
+  };
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -236,8 +282,8 @@
     extraOptions = "experimental-features = nix-command flakes";
     settings = {
       auto-optimise-store = true;
-      substituters = ["https://hyprland.cachix.org"];
-      trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+      # substituters = ["https://hyprland.cachix.org"];
+      # trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     gc = {
       automatic = true;
@@ -253,12 +299,12 @@
   };
 
   environment.variables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    XDG_SESSION_TYPE = "wayland";
-    GBM_BACKEND = "nvidia-drm";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
+    # LIBVA_DRIVER_NAME = "nvidia";
+    # XDG_SESSION_TYPE = "wayland";
+    # GBM_BACKEND = "nvidia-drm";
+    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    # NIXOS_OZONE_WL = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
