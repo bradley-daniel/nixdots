@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   home = {
     username = "bradley";
     homeDirectory = "/home/bradley";
@@ -31,4 +31,15 @@
     "$HOME/.cargo/bin"
   ];
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    BROWSER = "firefox";
+    TERMINAL = "alacritty";
+  };
+
+  home.pointerCursor = {
+    name = "macOS-BigSur";
+    package = pkgs.apple-cursor;
+    size = 32;
+  };
 }

@@ -6,37 +6,31 @@
   gtk = {
     enable = true;
     font = {
-      name = "Lexend";
-      package = pkgs.lexend;
+      name = "JetBrainsMono Nerd Font";
     };
 
-    gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
-
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome.gnome-themes-extra;
+      name = "Dracula";
+      package = pkgs.dracula-theme;
+    };
+
+    cursorTheme = {
+      name = "macOS-BigSur";
+      package = pkgs.apple-cursor;
+      size = 32; # Affects gtk applications as the name suggests
     };
 
     iconTheme = {
-      name = "Papirus-Dark";
-      package = pkgs.papirus-icon-theme;
+      name = "Dracula";
+      package = pkgs.dracula-icon-theme;
     };
 
     gtk3.extraConfig = {
-      gtk-xft-antialias = 1;
-      gtk-xft-hinting = 1;
-      gtk-xft-hintstyle = "hintslight";
-      gtk-xft-rgba = "rgb";
       gtk-application-prefer-dark-theme = 1;
     };
 
-    gtk2.extraConfig = ''
-      gtk-xft-antialias=1
-      gtk-xft-hinting=1
-      gtk-xft-hintstyle="hintslight"
-      gtk-xft-rgba="rgb"
-    '';
-
-    gtk4.extraConfig = {gtk-application-prefer-dark-theme = 1;};
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
   };
 }

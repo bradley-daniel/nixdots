@@ -1,4 +1,4 @@
- {
+{
   config,
   pkgs,
   inputs,
@@ -73,7 +73,7 @@
 
   # Enable programs
   programs = {
-    steam.enable = true;
+    # steam.enable = true;
     zsh.enable = true;
     dconf.enable = true;
     thunar.enable = true;
@@ -152,7 +152,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
     git
     wget
     playerctl
@@ -173,10 +172,15 @@
     htop
     btop
     rustup
+    go
     fzf
     gimp
     unzip
     zip
+
+    clang
+    gnumake
+    clang-tools
 
     polkit_gnome
 
@@ -186,10 +190,12 @@
     nodejs_21
     prettierd
     jdk
+
     # typescript
     nodePackages.typescript-language-server
     nodePackages.prettier
     nodePackages.pyright
+    vscode-langservers-extracted
 
     jq
 
@@ -197,42 +203,33 @@
     stylua
 
     spotify
-    wlr-randr
     pamixer
     discord
 
     zoom-us
 
     firefox
-    # xwaylandvideobridge
     linuxKernel.packages.linux_6_8.perf
-
-    xclip
-    xorg.xrandr
-    feh
 
     python311
     ruff
     poetry
-    # (pkgs.python311.withPackages
-    #   (ps:
-    #     with ps; [
-    #       # Python Dev pkgs
-    #       # flake8
-    #       # black
-    #     ]))
 
+    # inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
     # wl-clipboard
     # waybar
     # hyprshot
     # swappy
     # slurp
     # grim
+    # wlr-randr
+    # xwaylandvideobridge
   ];
 
   # Nvidia
   services.xserver = {
     videoDrivers = ["nvidia"];
+    excludePackages = [pkgs.xterm];
 
     enable = true;
 
@@ -241,6 +238,10 @@
       extraPackages = with pkgs; [
         i3blocks
         dmenu
+        xclip
+        xorg.xrandr
+        feh
+        autotiling
       ];
     };
 
@@ -290,21 +291,6 @@
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-  };
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  };
-
-  environment.variables = {
-    # LIBVA_DRIVER_NAME = "nvidia";
-    # XDG_SESSION_TYPE = "wayland";
-    # GBM_BACKEND = "nvidia-drm";
-    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    # WLR_NO_HARDWARE_CURSORS = "1";
-    # NIXOS_OZONE_WL = "1";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

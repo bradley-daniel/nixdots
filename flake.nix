@@ -37,6 +37,7 @@
             inherit
               inputs
               # hyprland
+              
               ;
 
             pkgs = import nixpkgs {
@@ -51,12 +52,6 @@
               ];
             };
           };
-          # defaultPackage.${system} = with nixpkgs; {
-          #   shellCommand = ''
-          #     # Your shell command here
-          #     echo "Hello, world!"
-          #   '';
-          # };
           modules = [
             ./hosts/bradley/configuration.nix
             home-manager.nixosModules.home-manager
