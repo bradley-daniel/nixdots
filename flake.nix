@@ -45,11 +45,11 @@
               config = {
                 allowUnfree = true;
               };
-              overlays = [
-                (final: prev: {
-                  neovim = inputs.neovim.packages.${final.system}.neovim;
-                })
-              ];
+              # overlays = [
+              #   (final: prev: {
+              #     neovim = inputs.neovim.packages.${final.system}.neovim;
+              #   })
+              # ];
             };
           };
           modules = [

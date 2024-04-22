@@ -28,7 +28,7 @@
       zstyle ':completion:*:default' list-colors $LS_COLORS
       zmodload zsh/complist
       compinit
-      _comp_options+=(globdots)		# Include hidden files.
+      # _comp_options+=(globdots)		# Include hidden files.
     '';
     historySubstringSearch.enable = true;
     autosuggestion.enable = true;
@@ -49,8 +49,8 @@
       nixswitch = "sudo nixos-rebuild switch --flake ~/.nixdots#bradley";
     };
     initExtra = ''
+      source ${./config.zsh}
       source $HOME/Dev/bin/zshrc.zsh
-      source ${./keybinds.zsh}
     '';
     plugins = [
       {

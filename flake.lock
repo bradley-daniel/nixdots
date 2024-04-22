@@ -46,11 +46,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1713600023,
-        "narHash": "sha256-xF73p16Y1/GPgyt3LkuFmmPf8HR2S8RVF/5xkCDq4AU=",
+        "lastModified": 1713809823,
+        "narHash": "sha256-aiieHXCBDjVux6+lVmPy+KeshGmHcBxWAanMPR9gsIU=",
         "owner": "bradley-daniel",
         "repo": "neovim",
-        "rev": "2655a67eda013f1d3f498a99c803292d65e9ad27",
+        "rev": "b1ed6c9aab3e1d41f241284719ecae9baef56ef0",
         "type": "github"
       },
       "original": {
@@ -118,11 +118,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1705309234,
-        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
         "type": "github"
       },
       "original": {
