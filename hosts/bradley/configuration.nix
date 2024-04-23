@@ -152,68 +152,70 @@
   };
 
   environment.systemPackages = with pkgs; [
+    firefox
+    discord
+    spotify
+    gimp
+    neovim
+
+    # Other
+    pamixer
+    dunst
+    polkit_gnome
+
+    ripgrep
+    gcc
+    eza
+    gh
+    fzf
+    unzip
+    zip
     git
     wget
     playerctl
 
-    steam-run
-
-    # TODO: REMOVE
-    neofetch
-    swww
-    dunst
-    neovim
+    # nix
     nil
-    gcc
     alejandra
-    eza
-    ripgrep
-    gh
-    htop
-    btop
+
     rustup
     go
-    fzf
-    gimp
-    unzip
-    zip
 
+    # C && C++
     clang
     gnumake
     clang-tools
 
-    polkit_gnome
-
-    libreoffice
-
+    # App development
     android-studio
-    nodejs_21
-    prettierd
     jdk
 
-    # typescript
+    # typescript and javascript
+    nodejs_21
+    prettierd
     nodePackages.typescript-language-server
     nodePackages.prettier
-    nodePackages.pyright
     vscode-langservers-extracted
+
+    marksman
+    # mdformat
+    cbfmt
+    python311Packages.mdformat-tables
 
     jq
 
     lua-language-server
     stylua
 
-    spotify
-    pamixer
-    discord
+    htop
+    btop
+    neofetch
+    steam-run
 
-    zoom-us
-
-    firefox
-    linuxKernel.packages.linux_6_8.perf
-
-    python311
-    ruff
-    poetry
+    # python311
+    # nodePackages.pyright
+    # ruff
+    # poetry
 
     # inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
     # wl-clipboard
@@ -224,6 +226,7 @@
     # grim
     # wlr-randr
     # xwaylandvideobridge
+    # swww
   ];
 
   # Nvidia
