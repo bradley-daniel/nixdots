@@ -7,7 +7,7 @@
   programs.tmux = {
     enable = true;
     baseIndex = 1;
-    prefix = "C-Space";
+    prefix = "C-space";
     extraConfig = ''
       set -g default-terminal "tmux-256color"
       set -ag terminal-overrides ",xterm-256color:RGB"

@@ -22,18 +22,21 @@
 
     enableCompletion = true;
     completionInit = ''
-      autoload -U colors && colors
-      autoload -U compinit
-      zstyle ':completion:*' menu select colors
-      zstyle ':completion:*:default' list-colors $LS_COLORS
-      zmodload zsh/complist
-      compinit
+      # autoload -U colors && colors
+      # autoload -U compinit
+      # zstyle ':completion:*' menu select colors
+      # zstyle ':completion:*:default' list-colors $LS_COLORS
+      # zmodload zsh/complist
+      # compinit
       # _comp_options+=(globdots)		# Include hidden files.
     '';
     historySubstringSearch.enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    # oh-my-zsh.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = ["git" "vi-mode"];
+    };
 
     history = {
       save = 10000;
@@ -45,6 +48,7 @@
     shellAliases = {
       l = "eza -lh --icons";
       ls = "eza -h --git --icons --color=auto --group-directories-first -s extension";
+      la = "eza -alh --icons";
       vim = "nvim";
       nixswitch = "sudo nixos-rebuild switch --flake ~/.nixdots#bradley";
     };
