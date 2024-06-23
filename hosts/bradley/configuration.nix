@@ -180,7 +180,10 @@
     alejandra
 
     rustup
+
     go
+    gopls
+
 
     # C && C++
     clang
@@ -212,6 +215,8 @@
     btop
     neofetch
     steam-run
+
+    maim
 
     # python311
     # nodePackages.pyright
