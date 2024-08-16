@@ -115,9 +115,15 @@
   hardware = {
     enableAllFirmware = true;
     cpu.amd.updateMicrocode = true;
-    opengl = {
+    # opengl = {
+    #   enable = true;
+    #   # driSupport32Bit = true;
+    #   # extraPackages = with pkgs; [nvidia-vaapi-driver];
+    # };
+
+    graphics = {
       enable = true;
-      driSupport32Bit = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [nvidia-vaapi-driver];
     };
   };
@@ -152,12 +158,15 @@
     };
   };
 
+  programs.steam.enable = true;
+
   environment.systemPackages = with pkgs; [
     firefox
     discord
     spotify
     gimp
     neovim
+    calibre
 
     # Other
     pamixer
@@ -174,6 +183,7 @@
     git
     wget
     playerctl
+    fd
 
     # nix
     nil
@@ -183,7 +193,6 @@
 
     go
     gopls
-
 
     # C && C++
     clang
@@ -195,7 +204,7 @@
     jdk
 
     # typescript and javascript
-    nodejs_21
+    nodejs_22
     prettierd
     nodePackages.typescript-language-server
     nodePackages.prettier
@@ -218,10 +227,11 @@
 
     maim
 
-    # python311
-    # nodePackages.pyright
-    # ruff
-    # poetry
+    python311
+    pyright
+    ruff
+    poetry
+    python311Packages.flake8
 
     # inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
     # wl-clipboard

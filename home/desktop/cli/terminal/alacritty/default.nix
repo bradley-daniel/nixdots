@@ -1,8 +1,10 @@
 {...}: {
   home.file.".config/alacritty/catppuccin.toml".source = ./themes/catppuccin.toml;
+  # home.file.".config/alacritty/kanagawa.toml".source = ./themes/kanagawa.toml;
   programs.alacritty = {
     enable = true;
     settings = {
+      # import = ["~/.config/alacritty/kanagawa.toml"];
       import = ["~/.config/alacritty/catppuccin.toml"];
       font = {
         normal = {
