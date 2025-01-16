@@ -42,20 +42,6 @@
     deno
   ];
 
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session.command = ''
-  #       ${pkgs.greetd.tuigreet}/bin/tuigreet \
-  #         --remember \
-  #         --time \
-  #         --asterisks \
-  #         --user-menu \
-  #         --cmd Hyprland
-  #     '';
-  #   };
-  # };
-
   # Enable networking
   networking = {
     networkmanager.enable = true;
@@ -67,32 +53,22 @@
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-  services.automatic-timezoned.enable = true;
+  # services.automatic-timezoned.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Enable programs
   programs = {
-    # steam.enable = true;
     zsh.enable = true;
     dconf.enable = true;
     thunar.enable = true;
     nano.enable = false;
-    # hyprland = {
-    #   enable = true;
-    #   xwayland = {
-    #     enable = true;
-    #   };
-    # };
+    steam.enable = true;
   };
 
   # Allow unfree packages
-
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config = {
-  #   allowUnfree = true;
-  # };
 
   # Enables docker in rootless mode
   virtualisation = {
@@ -111,6 +87,11 @@
   };
 
   environment.pathsToLink = ["/libexec"];
+  environment.sessionVariables = {
+    # NIXOS_OZONE_WL = "1";
+    XCURSOR_THEME = "macOS";
+    XCURSOR_SIZE = "24";
+  };
 
   hardware = {
     enableAllFirmware = true;
@@ -133,8 +114,8 @@
   hardware.bluetooth.powerOnBoot = true;
 
   # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  # sound.enable = true;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -145,8 +126,6 @@
     # jack.enable = true;
   };
 
-  # services.
-
   users = {
     users = {
       bradley = {
@@ -154,26 +133,26 @@
         description = "bradley";
         shell = pkgs.zsh;
         extraGroups = ["networkmanager" "wheel" "input" "docker" "libvirtd"];
+        packages = with pkgs; [
+          # Gui
+          firefox
+          google-chrome
+          discord
+          ldtk
+
+          # Commands-Line
+          neovim
+          htop
+          btop
+          neofetch
+          steam-run
+        ];
       };
     };
   };
 
-  programs.steam.enable = true;
-
   environment.systemPackages = with pkgs; [
-    firefox
-    google-chrome
-    discord
-    spotify
-    gimp
-    neovim
-    calibre
-
-    # Other
     pamixer
-    dunst
-    polkit_gnome
-
     ripgrep
     gcc
     eza
@@ -185,13 +164,16 @@
     wget
     playerctl
     fd
+    jq
 
     # nix
     nil
     alejandra
 
+    # Rust
     rustup
 
+    # Go
     go
     gopls
 
@@ -200,10 +182,6 @@
     gnumake
     clang-tools
 
-    # App development
-    android-studio
-    jdk
-
     # typescript and javascript
     nodejs_22
     prettierd
@@ -211,68 +189,83 @@
     nodePackages.prettier
     vscode-langservers-extracted
 
-    marksman
     # mdformat
+    marksman
     cbfmt
     python311Packages.mdformat-tables
 
-    jq
-
+    # Lua
+    lua5_1
+    luajitPackages.luarocks
     lua-language-server
     stylua
 
-    htop
-    btop
-    neofetch
-    steam-run
+    # Neovim
+    tree-sitter
 
-    maim
-
+    # Python
     python311
     pyright
     ruff
-    poetry
     python311Packages.flake8
-
-    # inputs.xdg-portal-hyprland.packages.${system}.xdg-desktop-portal-hyprland
-    # wl-clipboard
-    # waybar
-    # hyprshot
-    # swappy
-    # slurp
-    # grim
-    # wlr-randr
-    # xwaylandvideobridge
-    # swww
   ];
 
   # Nvidia
-  services.xserver = {
-    videoDrivers = ["nvidia"];
-    excludePackages = [pkgs.xterm];
 
+  environment.variables = {
+    NVD_BACKEND = "direct";
+    NIXOS_OZONE_WL = "1";
+  };
+  services.xserver.enable = false;
+  services.xserver.videoDrivers = ["nvidia"];
+  programs.sway = {
     enable = true;
+    xwayland.enable = true;
+    wrapperFeatures.gtk = true;
+    extraPackages = with pkgs; [
+      wmenu
+      dunst
+      wlr-randr
+      wl-clipboard
+      autotiling-rs
+    ];
+  };
 
-    windowManager.i3 = {
-      enable = true;
-      extraPackages = with pkgs; [
-        i3blocks
-        dmenu
-        xclip
-        xorg.xrandr
-        feh
-        autotiling
-      ];
-    };
-
-    desktopManager = {
-      xterm.enable = false;
-    };
-
-    displayManager = {
-      lightdm.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd \"sway --unsupported-gpu --config $HOME/.config/sway/config\"";
+        user = "bradley";
+      };
     };
   };
+  # services.xserver = {
+  #   videoDrivers = ["nvidia"];
+  #   excludePackages = [pkgs.xterm];
+  #
+  #   enable = true;
+  #
+  #   windowManager.i3 = {
+  #     enable = true;
+  #     extraPackages = with pkgs; [
+  #       i3blocks
+  #       dmenu
+  #       xclip
+  #       xorg.xrandr
+  #       feh
+  #       autotiling
+  #     ];
+  #   };
+  #
+  #   desktopManager = {
+  #     xterm.enable = false;
+  #   };
+  #
+  #   displayManager = {
+  #     lightdm.enable = true;
+  #   };
+  # };
 
   hardware.nvidia = {
     # Modesetting is required.
@@ -294,12 +287,12 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   # Enables flakes + garbage collector
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = "experimental-features = nix-command flakes";
     settings = {
       auto-optimise-store = true;

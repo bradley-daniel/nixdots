@@ -15,9 +15,9 @@
     };
 
     cursorTheme = {
-      name = "macOS-BigSur";
-      package = pkgs.apple-cursor;
-      size = 32; # Affects gtk applications as the name suggests
+      name = "macOS";
+      # package = pkgs.apple-cursor;
+      size = 24; # Affects gtk applications as the name suggests
     };
 
     iconTheme = {

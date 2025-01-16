@@ -11,7 +11,7 @@
 
   imports = [
     ./cli
-    ./graphical
+    # ./graphical
     ./system
     ./themes
     # ./dev
@@ -37,9 +37,9 @@
     TERMINAL = "alacritty";
   };
 
-  home.pointerCursor = {
-    name = "macOS-BigSur";
-    package = pkgs.apple-cursor;
-    size = 32;
-  };
+  # home.pointerCursor = {
+  #   name = "apple_cursor";
+  #   package = pkgs.apple-cursor;
+  #   size = 24;
+  # };
 }

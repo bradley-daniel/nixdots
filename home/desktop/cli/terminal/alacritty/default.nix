@@ -5,7 +5,7 @@
     enable = true;
     settings = {
       # import = ["~/.config/alacritty/kanagawa.toml"];
-      import = ["~/.config/alacritty/catppuccin.toml"];
+      general.import = ["~/.config/alacritty/catppuccin.toml"];
       font = {
         normal = {
           family = "JetBrainsMono Nerd Font";
