@@ -212,60 +212,60 @@
 
   # Nvidia
 
-  environment.variables = {
-    NVD_BACKEND = "direct";
-    NIXOS_OZONE_WL = "1";
-  };
-  services.xserver.enable = false;
-  services.xserver.videoDrivers = ["nvidia"];
-  programs.sway = {
-    enable = true;
-    xwayland.enable = true;
-    wrapperFeatures.gtk = true;
-    extraPackages = with pkgs; [
-      wmenu
-      dunst
-      wlr-randr
-      wl-clipboard
-      autotiling-rs
-    ];
-  };
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd \"sway --unsupported-gpu --config $HOME/.config/sway/config\"";
-        user = "bradley";
-      };
-    };
-  };
-  # services.xserver = {
-  #   videoDrivers = ["nvidia"];
-  #   excludePackages = [pkgs.xterm];
-  #
+  # environment.variables = {
+  #   NVD_BACKEND = "direct";
+  #   NIXOS_OZONE_WL = "1";
+  # };
+  # services.xserver.enable = false;
+  # services.xserver.videoDrivers = ["nvidia"];
+  # programs.sway = {
   #   enable = true;
-  #
-  #   windowManager.i3 = {
-  #     enable = true;
-  #     extraPackages = with pkgs; [
-  #       i3blocks
-  #       dmenu
-  #       xclip
-  #       xorg.xrandr
-  #       feh
-  #       autotiling
-  #     ];
-  #   };
-  #
-  #   desktopManager = {
-  #     xterm.enable = false;
-  #   };
-  #
-  #   displayManager = {
-  #     lightdm.enable = true;
+  #   xwayland.enable = true;
+  #   wrapperFeatures.gtk = true;
+  #   extraPackages = with pkgs; [
+  #     wmenu
+  #     dunst
+  #     wlr-randr
+  #     wl-clipboard
+  #     autotiling-rs
+  #   ];
+  # };
+
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd \"sway --unsupported-gpu --config $HOME/.config/sway/config\"";
+  #       user = "bradley";
+  #     };
   #   };
   # };
+  services.xserver = {
+    videoDrivers = ["nvidia"];
+    excludePackages = [pkgs.xterm];
+
+    enable = true;
+
+    windowManager.i3 = {
+      enable = true;
+      extraPackages = with pkgs; [
+        i3blocks
+        dmenu
+        xclip
+        xorg.xrandr
+        feh
+        autotiling
+      ];
+    };
+
+    desktopManager = {
+      xterm.enable = false;
+    };
+
+    displayManager = {
+      lightdm.enable = true;
+    };
+  };
 
   hardware.nvidia = {
     # Modesetting is required.
