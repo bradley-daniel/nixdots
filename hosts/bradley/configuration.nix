@@ -91,21 +91,23 @@
     # NIXOS_OZONE_WL = "1";
     XCURSOR_THEME = "macOS";
     XCURSOR_SIZE = "24";
+    NVD_BACKEND = "direct";
+    NIXOS_OZONE_WL = "1";
   };
 
   hardware = {
     enableAllFirmware = true;
     cpu.amd.updateMicrocode = true;
-    # opengl = {
-    #   enable = true;
-    #   # driSupport32Bit = true;
-    #   # extraPackages = with pkgs; [nvidia-vaapi-driver];
-    # };
+    opengl = {
+      enable = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [nvidia-vaapi-driver mesa];
+    };
 
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [nvidia-vaapi-driver];
+      extraPackages = with pkgs; [nvidia-vaapi-driver mesa];
     };
   };
 
@@ -146,6 +148,7 @@
           btop
           neofetch
           steam-run
+          starship
         ];
       };
     };
@@ -212,11 +215,6 @@
 
   # Nvidia
 
-  # environment.variables = {
-  #   NVD_BACKEND = "direct";
-  #   NIXOS_OZONE_WL = "1";
-  # };
-  # services.xserver.enable = false;
   # services.xserver.videoDrivers = ["nvidia"];
   # programs.sway = {
   #   enable = true;
@@ -230,7 +228,7 @@
   #     autotiling-rs
   #   ];
   # };
-
+  #
   # services.greetd = {
   #   enable = true;
   #   settings = {
@@ -240,6 +238,7 @@
   #     };
   #   };
   # };
+
   services.xserver = {
     videoDrivers = ["nvidia"];
     excludePackages = [pkgs.xterm];
@@ -255,6 +254,10 @@
         xorg.xrandr
         feh
         autotiling
+        volumeicon
+        alsa-utils
+
+       myxer
       ];
     };
 

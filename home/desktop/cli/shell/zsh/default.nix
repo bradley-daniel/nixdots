@@ -14,7 +14,8 @@
 
     initExtraFirst = ''
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
-        source ${./p10k.zsh}
+        eval "$(starship init zsh)"
+        # source ${./p10k.zsh}
       else
         bash -i
        fi
@@ -22,22 +23,29 @@
 
     enableCompletion = true;
     completionInit = ''
-      # autoload -U colors && colors
-      # autoload -U compinit
-      # zstyle ':completion:*' menu select colors
-      # zstyle ':completion:*:default' list-colors $LS_COLORS
-      # zmodload zsh/complist
-      # compinit
-      # _comp_options+=(globdots)		# Include hidden files.
+      autoload -U colors && colors
+      autoload -U compinit
+      zstyle ':completion:*' menu select colors
+      zstyle ':completion:*:default' list-colors $LS_COLORS
+      zmodload zsh/complist
+      compinit
+      _comp_options+=(globdots)		# Include hidden files.
+
+      # Make zsh autocomplete with up arrow
+      autoload -Uz history-search-end
+      zle -N history-beginning-search-backward-end history-search-end
+      zle -N history-beginning-search-forward-end history-search-end
+      bindkey "$terminfo[kcuu1]" history-beginning-search-backward-end
+      bindkey "$terminfo[kcud1]" history-beginning-search-forward-
     '';
     historySubstringSearch.enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = ["git" "vi-mode"];
-    };
-
+    # oh-my-zsh = {
+    #   enable = true;
+    #   plugins = ["git" "vi-mode"];
+    # };
+    #
     history = {
       save = 10000;
       size = 10000;
@@ -56,14 +64,14 @@
       source ${./config.zsh}
       source $HOME/Dev/bin/zshrc.zsh
     '';
-    plugins = [
-      {
-        file = "powerlevel10k.zsh-theme";
-        name = "powerlevel10k";
-        src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
-      }
-    ];
-
+    # plugins = [
+    #   {
+    #     file = "powerlevel10k.zsh-theme";
+    #     name = "powerlevel10k";
+    #     src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
+    #   }
+    # ];
+    #
     shellGlobalAliases = {eza = "eza --icons --git";};
   };
 }
