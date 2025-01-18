@@ -98,12 +98,6 @@
   hardware = {
     enableAllFirmware = true;
     cpu.amd.updateMicrocode = true;
-    opengl = {
-      enable = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [nvidia-vaapi-driver mesa];
-    };
-
     graphics = {
       enable = true;
       enable32Bit = true;
@@ -157,7 +151,6 @@
   environment.systemPackages = with pkgs; [
     pamixer
     ripgrep
-    gcc
     eza
     gh
     fzf
@@ -180,7 +173,7 @@
     go
     gopls
 
-    # C && C++
+    # LLVM Compiler
     clang
     gnumake
     clang-tools

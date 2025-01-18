@@ -24,17 +24,6 @@
         nixpkgs.lib.nixosSystem
         rec {
           system = "x86_64-linux";
-          specialArgs = {
-            inherit
-              inputs
-              ;
-            pkgs = import nixpkgs {
-              inherit system;
-              config = {
-                allowUnfree = true;
-              };
-            };
-          };
           modules = [
             ./hosts/bradley/configuration.nix
             home-manager.nixosModules.home-manager
