@@ -22,7 +22,7 @@
     nixosConfigurations = {
       bradley =
         nixpkgs.lib.nixosSystem
-        rec {
+        {
           system = "x86_64-linux";
           modules = [
             ./hosts/bradley/configuration.nix

@@ -26,6 +26,10 @@
     device = "/dev/disk/by-label/boot";
   };
 
+  # fileSystems."$HOME/Games" = {
+  #   device = "/dev/nvme0n1p4";
+  # };
+
   swapDevices = [
     {device = "/dev/disk/by-uuid/1a77dd7f-8d04-42b2-b56d-46c221187587";}
   ];

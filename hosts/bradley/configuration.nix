@@ -91,8 +91,8 @@
     # NIXOS_OZONE_WL = "1";
     XCURSOR_THEME = "macOS";
     XCURSOR_SIZE = "24";
-    NVD_BACKEND = "direct";
-    NIXOS_OZONE_WL = "1";
+    # NVD_BACKEND = "direct";
+    # NIXOS_OZONE_WL = "1";
   };
 
   hardware = {
@@ -143,6 +143,8 @@
           neofetch
           steam-run
           starship
+
+          lazygit
         ];
       };
     };
@@ -161,6 +163,7 @@
     playerctl
     fd
     jq
+    bat
 
     # nix
     nil
@@ -249,8 +252,7 @@
         autotiling
         volumeicon
         alsa-utils
-
-       myxer
+        myxer
       ];
     };
 
