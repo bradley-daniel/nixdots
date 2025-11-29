@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
   ];
 
-  # Bootloader.
+  # Bootloader
   boot = {
     kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
     # extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
@@ -19,11 +19,12 @@
     supportedFilesystems = ["ntfs"];
     loader = {
       systemd-boot.enable = false;
-      timeout = 3;
+      timeout = 5;
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
+
       grub = {
         enable = true;
         device = "nodev";
@@ -88,11 +89,8 @@
 
   environment.pathsToLink = ["/libexec"];
   environment.sessionVariables = {
-    # NIXOS_OZONE_WL = "1";
     XCURSOR_THEME = "macOS";
-    XCURSOR_SIZE = "24";
-    # NVD_BACKEND = "direct";
-    # NIXOS_OZONE_WL = "1";
+    XCURSOR_SIZE = "32";
   };
 
   hardware = {
@@ -119,7 +117,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
-    # jack.enable = true;
   };
 
   users = {
@@ -139,8 +136,11 @@
           # Commands-Line
           neovim
           htop
-          btop
-          neofetch
+          (btop.override {
+            cudaSupport = true; # Or rocmSupport = true; for AMD
+          })
+
+          fastfetch
           steam-run
           starship
 
@@ -164,6 +164,9 @@
     fd
     jq
     bat
+    pkg-config
+
+    efibootmgr
 
     # nix
     nil
@@ -191,7 +194,6 @@
     # mdformat
     marksman
     cbfmt
-    python311Packages.mdformat-tables
 
     # Lua
     lua5_1
@@ -203,10 +205,11 @@
     tree-sitter
 
     # Python
-    python311
+    python312
     pyright
     ruff
-    python311Packages.flake8
+    python312Packages.mdformat-tables
+    python312Packages.flake8
   ];
 
   # Nvidia

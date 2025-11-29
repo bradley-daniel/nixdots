@@ -10,16 +10,7 @@
   };
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
-
-    initExtraFirst = ''
-      if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
-        eval "$(starship init zsh)"
-        # source ${./p10k.zsh}
-      else
-        bash -i
-       fi
-    '';
+    dotDir = "${config.xdg.configHome}/zsh";
 
     enableCompletion = true;
     completionInit = ''
@@ -41,11 +32,6 @@
     historySubstringSearch.enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    # oh-my-zsh = {
-    #   enable = true;
-    #   plugins = ["git" "vi-mode"];
-    # };
-    #
     history = {
       save = 10000;
       size = 10000;
@@ -60,18 +46,17 @@
       vim = "nvim";
       nixswitch = "sudo nixos-rebuild switch --flake ~/.nixdots#bradley";
     };
-    initExtra = ''
+    initContent = lib.mkBefore ''
+      if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
+        eval "$(starship init zsh)"
+        # source ${./p10k.zsh}
+      else
+        bash -i
+       fi
+
       source ${./config.zsh}
       source $HOME/Dev/bin/zshrc.zsh
     '';
-    # plugins = [
-    #   {
-    #     file = "powerlevel10k.zsh-theme";
-    #     name = "powerlevel10k";
-    #     src = "${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k";
-    #   }
-    # ];
-    #
     shellGlobalAliases = {eza = "eza --icons --git";};
   };
 }

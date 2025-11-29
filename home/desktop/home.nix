@@ -36,10 +36,4 @@
     BROWSER = "firefox";
     TERMINAL = "alacritty";
   };
-
-  # home.pointerCursor = {
-  #   name = "apple_cursor";
-  #   package = pkgs.apple-cursor;
-  #   size = 24;
-  # };
 }

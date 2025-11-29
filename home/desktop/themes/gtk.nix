@@ -17,7 +17,7 @@
     cursorTheme = {
       name = "macOS";
       # package = pkgs.apple-cursor;
-      size = 24; # Affects gtk applications as the name suggests
+      size = 32; # Affects gtk applications as the name suggests
     };
 
     iconTheme = {
