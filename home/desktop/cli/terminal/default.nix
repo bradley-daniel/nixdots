@@ -1,5 +1,5 @@
 _: {
-  imports = [
-    ./alacritty
-  ];
+    imports = [
+        ./alacritty
+    ];
 }

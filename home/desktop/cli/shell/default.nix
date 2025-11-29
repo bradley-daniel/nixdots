@@ -1,6 +1,6 @@
 _: {
-  imports = [
-    ./zsh
-    ./tools
-  ];
+    imports = [
+        ./zsh
+        ./tools
+    ];
 }

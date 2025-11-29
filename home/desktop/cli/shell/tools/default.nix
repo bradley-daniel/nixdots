@@ -1,6 +1,6 @@
 _: {
-  imports = [
-    ./tmux
-    ./fzf
-  ];
+    imports = [
+        ./tmux
+        ./fzf
+    ];
 }

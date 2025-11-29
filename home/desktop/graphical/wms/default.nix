@@ -1,6 +1,6 @@
 _: {
-  imports = [
-    # ./hyprland
-   # ./i3
-  ];
+    imports = [
+        # ./hyprland
+        # ./i3
+    ];
 }

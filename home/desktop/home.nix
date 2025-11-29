@@ -1,39 +1,39 @@
 {pkgs, ...}: {
-  home = {
-    username = "bradley";
-    homeDirectory = "/home/bradley";
-    stateVersion = "23.11";
-  };
-
-  programs = {
-    home-manager.enable = true;
-  };
-
-  imports = [
-    ./cli
-    # ./graphical
-    ./system
-    ./themes
-    # ./dev
-  ];
-
-  nixpkgs = {
-    config = {
-      allowUnfreePredicate = pkg: true;
+    home = {
+        username = "bradley";
+        homeDirectory = "/home/bradley";
+        stateVersion = "23.11";
     };
-  };
 
-  fonts.fontconfig.enable = true;
+    programs = {
+        home-manager.enable = true;
+    };
 
-  home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/Dev/bin"
-    "$HOME/.cargo/bin"
-  ];
+    imports = [
+        ./cli
+        # ./graphical
+        ./system
+        ./themes
+        # ./dev
+    ];
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    BROWSER = "firefox";
-    TERMINAL = "alacritty";
-  };
+    nixpkgs = {
+        config = {
+            allowUnfreePredicate = pkg: true;
+        };
+    };
+
+    fonts.fontconfig.enable = true;
+
+    home.sessionPath = [
+        "$HOME/.local/bin"
+        "$HOME/Dev/bin"
+        "$HOME/.cargo/bin"
+    ];
+
+    home.sessionVariables = {
+        EDITOR = "nvim";
+        BROWSER = "firefox";
+        TERMINAL = "alacritty";
+    };
 }

@@ -1,5 +1,5 @@
 _: {
-  imports = [
-    ./fonts
-  ];
+    imports = [
+        ./fonts
+    ];
 }
